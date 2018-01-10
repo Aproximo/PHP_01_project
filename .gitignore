@@ -1,0 +1,3 @@
+/webroot/uploads/*
+!webroot/uploads/.gitkeep
+
