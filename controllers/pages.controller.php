@@ -35,28 +35,30 @@ class PagesController extends Controller {
 
 	    if ($_POST){
 
-            if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+            if ($_FILES['image']['error'] !== UPLOAD_ERR_OK && $_FILES['image']['error'] !=4) {
                 die("Upload failed with error code " . $_FILES['image']['error']);
             }
-            $info = getimagesize($_FILES['image']['tmp_name']);
+            if ($_FILES['image']['error'] !=4) {
+                $info = getimagesize($_FILES['image']['tmp_name']);
 
-            if ($info === FALSE) {
-                die("Unable to determine image type of uploaded file");
+                if ($info === FALSE) {
+                    die("Unable to determine image type of uploaded file");
+                }
+
+                if (($info[2] !== IMAGETYPE_GIF) && ($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
+                    die("Not a gif/jpeg/png");
+                }
+
+                $time = date("d.m.Y_H-i-s");
+                $fileName = "created on - $time " . $_FILES['image']['name'];
+                $this->saveFile($fileName);
+
+
+                if (($info[0] > 320) || ($info[1] > 240)) {
+                    $this->imageresize("uploads/" . $fileName, $fileName, 320, 240, 75);
+                }
+                $_POST['picture_name'] = $fileName;
             }
-
-            if (($info[2] !== IMAGETYPE_GIF) && ($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
-                 die("Not a gif/jpeg/png");
-            }
-
-            $time = date("d.m.Y_H-i-s");
-            $fileName = "created on - $time ".$_FILES['image']['name'];
-            $this->saveFile($fileName);
-
-
-            if( ($info[0] > 320) || ($info[1]>240) ){
-                $this->imageresize("uploads/".$fileName, $fileName,320,240,75);
-            }
-            $_POST['picture_name'] = $fileName;
             $result = $this->model->save($_POST);
 
             if ($result){

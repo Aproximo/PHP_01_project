@@ -1,3 +1,4 @@
+
 <h3>Add Page</h3><br>
 <form method="post" action="" enctype="multipart/form-data">
     <div class="show_preview" >
@@ -30,7 +31,7 @@
 
 
         <input type="submit" class="btn btn-success" value="Submit">
-        <button id="preview">Preview</button>
+        <button  type="button" id="preview" onclick="onClick()">Preview</button>
     </div>
 
     <div class="hide_preview" >
@@ -51,41 +52,7 @@
     </style>
 
     <script>
-        document.getElementById("preview").addEventListener("click", function(event){
-            event.preventDefault();
-            var data = ['username', 'email', 'task', 'title'];
-            console.log(data);
-            Object.keys(data).map(function(x){
-                document.getElementById("preview_" + data[x]).innerHTML = document.getElementById(data[x]).value;
-            });
-            show();
-            hide();
 
-        });
-    function show_hide(){
-        event.preventDefault();
-        hide();
-        show();
-    }
-        function hide(){
-            let show = document.getElementsByClassName("show_preview");
-            for (var i in show) {
-                if (show.hasOwnProperty(i)) {
-                    show[i].className = 'hide_preview';
-                }
-            }
-
-        }
-        function show(){
-
-            let hide = document.getElementsByClassName("hide_preview");
-
-            for (var i in hide) {
-                if (hide.hasOwnProperty(i)) {
-                    hide[i].className = 'show_preview';
-                }
-            }
-        }
     </script>
 
 </form>

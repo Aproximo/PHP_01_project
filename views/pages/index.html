@@ -2,24 +2,17 @@
 <table class = "table table-striped" >
 	<thead>
 		<tr>
-			<td>
+			<td onclick="addOrUpdateUrlParam('id', 2)">
 				Title
 			</td>
 			<td>
-				<a href="<?=
-					(isset($_GET['sort']) && $_GET['sort'] === 'username.DESC')  ? '?sort=username.ASC' : '?sort=username.DESC';
-				?>">UserName</a>
-
+				<span class="pointer" onclick= <?=(isset($_GET['sort']) && $_GET['sort'] === 'username.DESC') ? "addOrUpdateUrlParam('sort','username.ASC')" : "addOrUpdateUrlParam('sort','username.DESC')"; ?> >User Name</span>
 			</td>
 			<td>
-				<a href="<?=
-					(isset($_GET['sort']) && $_GET['sort'] === 'email.DESC')  ? '?sort=email.ASC' : '?sort=email.DESC';
-				?>">Email</a>
+				<span class="pointer" onclick= <?=(isset($_GET['sort']) && $_GET['sort'] === 'email.DESC') ? "addOrUpdateUrlParam('sort','email.ASC')" : "addOrUpdateUrlParam('sort','email.DESC')"; ?> >Email</span>
 			</td>
 			<td>
-				<a href="<?=
-					(isset($_GET['sort']) && $_GET['sort'] === 'status.DESC')  ? '?sort=status.ASC' : '?sort=status.DESC';
-				?>">Status</a>
+				<span class="pointer" onclick= <?=(isset($_GET['sort']) && $_GET['sort'] === 'status.DESC') ? "addOrUpdateUrlParam('sort','status.ASC')" : "addOrUpdateUrlParam('sort','status.DESC')"; ?> >Status</span>
 			</td>
 		</tr>
 	</thead>
@@ -57,21 +50,19 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
 $total = intval((($data['count']-1) / 3) + 1);
 
-if ($page != 1) $pervpage = '<a href=?page=1>Первая</a> | <a href=?page='. ($page - 1) .'>Предыдущая</a> | ';
 
-if ($page != $total) $nextpage = ' | <a href=?page='. ($page + 1) .'>Следующая</a> | <a href=?page=' .$total. '>Последняя</a>';
 
-if($page - 5 > 0) $page5left = ' <a href=?page='. ($page - 5) .'>'. ($page - 5) .'</a> | ';
-if($page - 4 > 0) $page4left = ' <a href=?page='. ($page - 4) .'>'. ($page - 4) .'</a> | ';
-if($page - 3 > 0) $page3left = ' <a href=?page='. ($page - 3) .'>'. ($page - 3) .'</a> | ';
-if($page - 2 > 0) $page2left = ' <a href=?page='. ($page - 2) .'>'. ($page - 2) .'</a> | ';
-if($page - 1 > 0) $page1left = '<a href=?page='. ($page - 1) .'>'. ($page - 1) .'</a> | ';
+if($page - 5 > 0) $page5left = " <span class=\"pointer\" onclick=\"addOrUpdateUrlParam('page'," .($page - 5)." )\">".($page - 5)."</span> | ";
+if($page - 4 > 0) $page4left = " <span class=\"pointer\" onclick=\"addOrUpdateUrlParam('page'," .($page - 4)." )\">".($page - 4)."</span> | ";
+if($page - 3 > 0) $page3left = " <span class=\"pointer\" onclick=\"addOrUpdateUrlParam('page'," .($page - 3)." )\">".($page - 3)."</span> | ";
+if($page - 2 > 0) $page2left = " <span class=\"pointer\" onclick=\"addOrUpdateUrlParam('page'," .($page - 2)." )\">".($page - 2)."</span> | ";
+if($page - 1 > 0) $page1left = " <span class=\"pointer\" onclick=\"addOrUpdateUrlParam('page'," .($page - 1)." )\">".($page - 1)."</span> | ";
 
-if($page + 5 <= $total) $page5right = ' | <a href=?page='. ($page + 5) .'>'. ($page + 5) .'</a>';
-if($page + 4 <= $total) $page4right = ' | <a href=?page='. ($page + 4) .'>'. ($page + 4) .'</a>';
-if($page + 3 <= $total) $page3right = ' | <a href=?page='. ($page + 3) .'>'. ($page + 3) .'</a>';
-if($page + 2 <= $total) $page2right = ' | <a href=?page='. ($page + 2) .'>'. ($page + 2) .'</a>';
-if($page + 1 <= $total) $page1right = ' | <a href=?page='. ($page + 1) .'>'. ($page + 1) .'</a>';
+if($page + 5 <= $total) $page5right = " | <span class=\"pointer\" onclick=\"addOrUpdateUrlParam('page'," .($page + 5)." )\">".($page + 5)."</span>";
+if($page + 4 <= $total) $page4right = " | <span class=\"pointer\" onclick=\"addOrUpdateUrlParam('page'," .($page + 4)." )\">".($page + 4)."</span>";
+if($page + 3 <= $total) $page3right = " | <span class=\"pointer\" onclick=\"addOrUpdateUrlParam('page'," .($page + 3)." )\">".($page + 3)."</span>";
+if($page + 2 <= $total) $page2right = " | <span class=\"pointer\" onclick=\"addOrUpdateUrlParam('page'," .($page + 2)." )\">".($page + 2)."</span>";
+if($page + 1 <= $total) $page1right = " | <span class=\"pointer\" onclick=\"addOrUpdateUrlParam('page'," .($page + 1)." )\">".($page + 1)."</span>";
 
 
 
